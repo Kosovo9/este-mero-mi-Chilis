@@ -1,0 +1,7 @@
+{
+  "name": "Christmas AI Studio",
+  "description": "A premium AI-powered photo studio for Christmas and New Year portraits using Gemini 2.5 Flash Image.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
