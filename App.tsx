@@ -97,16 +97,16 @@ const App: React.FC = () => {
   const renderStyle = () => (
     <div className="flex flex-col items-center min-h-screen pt-8 px-4 pb-48 animate-fadeIn w-full">
       <h2 className="text-4xl font-serif text-christmas-cream mb-8">{t.styleTitle}</h2>
-      
+
       {/* Tabs */}
       <div className="flex bg-white/5 p-1.5 rounded-full mb-12 border border-white/10 shadow-lg">
-        <button 
+        <button
           onClick={() => setActiveTab('studio')}
           className={`px-10 py-3 rounded-full font-bold text-sm transition-all ${activeTab === 'studio' ? 'bg-christmas-gold text-christmas-dark shadow-lg' : 'text-white/60 hover:text-white'}`}
         >
           {t.categories.studio}
         </button>
-        <button 
+        <button
           onClick={() => setActiveTab('global')}
           className={`px-10 py-3 rounded-full font-bold text-sm transition-all ${activeTab === 'global' ? 'bg-christmas-gold text-christmas-dark shadow-lg' : 'text-white/60 hover:text-white'}`}
         >
@@ -118,23 +118,23 @@ const App: React.FC = () => {
         {STYLES.filter(s => s.category === activeTab || s.isCustom).map(style => {
           const isSelected = state.selectedStyle?.id === style.id;
           return (
-            <button 
+            <button
               key={style.id}
               onClick={() => setState(prev => ({ ...prev, selectedStyle: style }))}
               className={`relative overflow-hidden rounded-2xl border-2 transition-all group ${isSelected ? 'border-christmas-gold scale-105 shadow-[0_0_30px_rgba(212,175,55,0.3)] z-10' : 'border-transparent opacity-80 hover:opacity-100'}`}
             >
               <div className="aspect-[4/5] bg-gray-800 relative overflow-hidden">
-                <img 
-                    src={style.imageSrc} 
-                    alt={style.nameKey} 
-                    className={`w-full h-full object-cover transition-transform duration-700 ${isSelected ? 'scale-110' : 'group-hover:scale-105'}`} 
+                <img
+                  src={style.imageSrc}
+                  alt={style.nameKey}
+                  className={`w-full h-full object-cover transition-transform duration-700 ${isSelected ? 'scale-110' : 'group-hover:scale-105'}`}
                 />
                 <div className={`absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60`}></div>
-                
+
                 {style.isCustom && (
-                    <div className="absolute inset-0 flex items-center justify-center bg-black/40">
-                        <EditIcon />
-                    </div>
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/40">
+                    <EditIcon />
+                  </div>
                 )}
               </div>
               <div className="p-4 bg-black/90 absolute bottom-0 left-0 right-0 backdrop-blur-sm">
@@ -148,26 +148,25 @@ const App: React.FC = () => {
 
       {state.selectedStyle?.isCustom && (
         <div className="w-full max-w-2xl mt-12 animate-fadeIn">
-            <label className="block text-christmas-gold mb-3 font-serif text-lg">{t.customStyleTitle}</label>
-            <textarea 
-                value={state.customPrompt}
-                onChange={(e) => setState(prev => ({ ...prev, customPrompt: e.target.value }))}
-                className="w-full p-6 bg-white/5 border border-christmas-gold/30 rounded-2xl text-christmas-cream h-40 outline-none focus:border-christmas-gold transition-colors resize-none shadow-inner"
-                placeholder={t.customStylePlaceholder}
-            />
+          <label className="block text-christmas-gold mb-3 font-serif text-lg">{t.customStyleTitle}</label>
+          <textarea
+            value={state.customPrompt}
+            onChange={(e) => setState(prev => ({ ...prev, customPrompt: e.target.value }))}
+            className="w-full p-6 bg-white/5 border border-christmas-gold/30 rounded-2xl text-christmas-cream h-40 outline-none focus:border-christmas-gold transition-colors resize-none shadow-inner"
+            placeholder={t.customStylePlaceholder}
+          />
         </div>
       )}
 
       {/* Sticky Bottom Bar */}
       <div className="fixed bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-christmas-dark via-christmas-dark/95 to-transparent flex justify-center z-50 pointer-events-none">
-        <button 
+        <button
           onClick={handleGenerate}
           disabled={!state.selectedStyle || (state.selectedStyle.id === 'custom' && !state.customPrompt)}
-          className={`pointer-events-auto px-20 py-5 rounded-full font-bold text-xl transition-all shadow-2xl flex items-center gap-3 active:scale-95 ${
-            (!state.selectedStyle || (state.selectedStyle.id === 'custom' && !state.customPrompt))
-            ? 'bg-gray-800 text-gray-500 cursor-not-allowed border border-gray-700'
-            : 'bg-christmas-gold text-christmas-dark hover:bg-yellow-400 hover:scale-105 border border-yellow-300' 
-          }`}
+          className={`pointer-events-auto px-20 py-5 rounded-full font-bold text-xl transition-all shadow-2xl flex items-center gap-3 active:scale-95 ${(!state.selectedStyle || (state.selectedStyle.id === 'custom' && !state.customPrompt))
+              ? 'bg-gray-800 text-gray-500 cursor-not-allowed border border-gray-700'
+              : 'bg-christmas-gold text-christmas-dark hover:bg-yellow-400 hover:scale-105 border border-yellow-300'
+            }`}
         >
           {state.credits <= 0 && <LockIcon />} {t.generateBtn}
         </button>
@@ -184,12 +183,12 @@ const App: React.FC = () => {
         </div>
         <div className="flex items-center gap-4">
           <div onClick={() => setState(prev => ({ ...prev, activeModal: 'pricing' }))} className="bg-white/5 border border-white/10 px-5 py-2.5 rounded-full cursor-pointer hover:bg-white/10 transition-all flex items-center gap-3 group">
-            <span className="text-christmas-gold text-lg group-hover:scale-125 transition-transform">★</span> 
+            <span className="text-christmas-gold text-lg group-hover:scale-125 transition-transform">★</span>
             <span className="font-bold tracking-tight">{state.credits}</span>
             <div className="w-5 h-5 rounded-full bg-christmas-gold text-christmas-dark flex items-center justify-center text-[10px] font-bold">+</div>
           </div>
-          <button 
-            onClick={() => setState(prev => ({ ...prev, language: prev.language === 'en' ? 'es' : 'en' }))} 
+          <button
+            onClick={() => setState(prev => ({ ...prev, language: prev.language === 'en' ? 'es' : 'en' }))}
             className="text-[10px] font-black uppercase tracking-[0.2em] border border-white/20 px-4 py-2.5 rounded-full hover:bg-white/5 transition-colors"
           >
             {state.language}
@@ -201,17 +200,17 @@ const App: React.FC = () => {
         {state.step === 'landing' && (
           <div className="flex flex-col items-center justify-center min-h-[80vh] text-center px-4 animate-fadeIn">
             <div className="mb-12 relative">
-                <div className="absolute -inset-20 bg-christmas-gold/10 rounded-full blur-[120px] animate-pulse"></div>
-                <h1 className="text-7xl md:text-9xl font-serif mb-8 gold-gradient leading-tight">{t.title}</h1>
-                <p className="text-xl md:text-2xl opacity-80 mb-16 max-w-2xl mx-auto font-light leading-relaxed">{t.subtitle}</p>
-                <button 
-                    onClick={() => setState(prev => ({ ...prev, step: 'upload' }))} 
-                    className="group relative px-16 py-6 bg-christmas-gold text-christmas-dark font-black rounded-full text-2xl shadow-[0_0_50px_rgba(212,175,55,0.4)] hover:shadow-[0_0_70px_rgba(212,175,55,0.6)] hover:bg-yellow-400 transition-all hover:scale-105 active:scale-95"
-                >
-                    <span className="relative z-10 flex items-center gap-3">
-                        <SparklesIcon /> {t.ctaStart}
-                    </span>
-                </button>
+              <div className="absolute -inset-20 bg-christmas-gold/10 rounded-full blur-[120px] animate-pulse"></div>
+              <h1 className="text-7xl md:text-9xl font-serif mb-8 gold-gradient leading-tight">{t.title}</h1>
+              <p className="text-xl md:text-2xl opacity-80 mb-16 max-w-2xl mx-auto font-light leading-relaxed">{t.subtitle}</p>
+              <button
+                onClick={() => setState(prev => ({ ...prev, step: 'upload' }))}
+                className="group relative px-16 py-6 bg-christmas-gold text-christmas-dark font-black rounded-full text-2xl shadow-[0_0_50px_rgba(212,175,55,0.4)] hover:shadow-[0_0_70px_rgba(212,175,55,0.6)] hover:bg-yellow-400 transition-all hover:scale-105 active:scale-95"
+              >
+                <span className="relative z-10 flex items-center gap-3">
+                  <SparklesIcon /> {t.ctaStart}
+                </span>
+              </button>
             </div>
           </div>
         )}
@@ -219,9 +218,9 @@ const App: React.FC = () => {
           <div className="flex flex-col items-center justify-center min-h-[70vh] px-4 animate-fadeIn">
             <h2 className="text-4xl md:text-5xl font-serif mb-4 text-white">{t.uploadTitle}</h2>
             <p className="text-christmas-cream/50 mb-12 text-center max-w-lg">{t.uploadDesc}</p>
-            <div 
-                onClick={() => fileInputRef.current?.click()} 
-                className="w-full max-w-2xl h-96 border-2 border-dashed border-white/10 rounded-[2.5rem] flex flex-col items-center justify-center cursor-pointer hover:border-christmas-gold hover:bg-white/5 transition-all group relative overflow-hidden"
+            <div
+              onClick={() => fileInputRef.current?.click()}
+              className="w-full max-w-2xl h-96 border-2 border-dashed border-white/10 rounded-[2.5rem] flex flex-col items-center justify-center cursor-pointer hover:border-christmas-gold hover:bg-white/5 transition-all group relative overflow-hidden"
             >
               <div className="absolute inset-0 bg-christmas-gold/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
               <div className="p-8 rounded-full bg-white/5 mb-6 group-hover:scale-110 transition-transform">
@@ -238,9 +237,9 @@ const App: React.FC = () => {
         {state.step === 'processing' && (
           <div className="flex flex-col items-center justify-center min-h-[70vh] animate-fadeIn">
             <div className="relative w-24 h-24 mb-12">
-                <div className="absolute inset-0 border-4 border-christmas-gold/20 rounded-full"></div>
-                <div className="absolute inset-0 border-4 border-christmas-gold rounded-full border-t-transparent animate-spin"></div>
-                <div className="absolute inset-0 flex items-center justify-center text-christmas-gold"><SparklesIcon /></div>
+              <div className="absolute inset-0 border-4 border-christmas-gold/20 rounded-full"></div>
+              <div className="absolute inset-0 border-4 border-christmas-gold rounded-full border-t-transparent animate-spin"></div>
+              <div className="absolute inset-0 flex items-center justify-center text-christmas-gold"><SparklesIcon /></div>
             </div>
             <h3 className="text-3xl font-serif gold-gradient mb-4">{t.processing}</h3>
             <p className="text-christmas-cream/50 font-light tracking-wide">Identity lock engaged. Fine-tuning Oscar-level lighting...</p>
@@ -253,16 +252,16 @@ const App: React.FC = () => {
               <img src={state.generatedImage!} className="w-full h-auto border border-gray-100" alt="Result" />
             </div>
             <div className="flex flex-col sm:flex-row gap-6 w-full max-w-lg">
-              <a 
-                href={state.generatedImage!} 
-                download="my-christmas-portrait.jpg" 
+              <a
+                href={state.generatedImage!}
+                download="my-christmas-portrait.jpg"
                 className="flex-1 bg-christmas-green text-white py-5 rounded-full font-bold text-center text-lg hover:bg-green-700 transition-all shadow-xl flex items-center justify-center gap-2 group"
               >
                 <svg className="w-5 h-5 group-hover:translate-y-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
                 {t.downloadBtn}
               </a>
-              <button 
-                onClick={handleReset} 
+              <button
+                onClick={handleReset}
                 className="flex-1 border-2 border-christmas-gold text-christmas-gold py-5 rounded-full font-bold text-lg hover:bg-christmas-gold/10 transition-all"
               >
                 {t.tryAgainBtn}
@@ -274,18 +273,33 @@ const App: React.FC = () => {
 
       <Footer t={t} />
       <VoiceAssistant isActive={state.isVoiceActive} onToggle={async () => {
-          if (state.isVoiceActive) {
-              await stopLiveSession();
-              setState(s => ({ ...s, isVoiceActive: false }));
-          } else {
-              const ok = await startLiveSession(() => setState(s => ({ ...s, isVoiceActive: false })));
-              if (ok) setState(s => ({ ...s, isVoiceActive: true }));
-          }
+        if (state.isVoiceActive) {
+          await stopLiveSession();
+          setState(s => ({ ...s, isVoiceActive: false }));
+        } else {
+          const ok = await startLiveSession(() => setState(s => ({ ...s, isVoiceActive: false })));
+          if (ok) setState(s => ({ ...s, isVoiceActive: true }));
+        }
       }} t={t} />
-      
+
       <AffiliateModal isOpen={state.activeModal === 'affiliate'} onClose={() => setState(prev => ({ ...prev, activeModal: 'none' }))} t={t} />
       <DonationModal isOpen={state.activeModal === 'donation'} onClose={() => setState(prev => ({ ...prev, activeModal: 'none' }))} t={t} />
       <PricingModal isOpen={state.activeModal === 'pricing'} onClose={() => setState(prev => ({ ...prev, activeModal: 'none' }))} onPurchase={(n) => setState(prev => ({ ...prev, credits: prev.credits + n }))} t={t} />
+
+      {/* 10X Optimized Snowfall */}
+      <div className="fixed inset-0 pointer-events-none z-[1000]" id="snow-container"></div>
+
+      {/* WhatsApp Button */}
+      <a
+        href="https://wa.me/526143277218"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="fixed bottom-6 right-6 bg-[#25D366] text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-transform z-50 flex items-center justify-center"
+      >
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-4.741 1.242 1.26-4.622-.236-.375a9.845 9.845 0 01-1.51-5.26c.001-5.446 4.432-9.877 9.881-9.877 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.449-4.433 9.877-9.88 9.877m8.415-18.297A11.815 11.815 0 0012.05 0C5.414 0 0 5.414 0 12.05c0 2.123.552 4.197 1.602 6.02L0 24l6.135-1.61a11.8 11.8 0 005.914 1.586h.004c6.635 0 12.049-5.414 12.049-12.05a11.81 11.81 0 00-3.417-8.414z" />
+        </svg>
+      </a>
     </div>
   );
 };
